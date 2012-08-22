@@ -134,7 +134,7 @@ void *targetFile_write(char *targetFile, char *str)
 }
 
 
-void lex(char *targetFile, char *keyFile, char *mapped)
+char* lex(char *targetFile, char *keyFile, char *mapped)
 {
 	char *t = targetFile_read(targetFile);
 	//printf("Target file contents: \n%s\n", t);
@@ -153,7 +153,8 @@ void lex(char *targetFile, char *keyFile, char *mapped)
 	targetFile_write(mapped, t);
 
 	free(array);
-	free(t);
+	
+	return t;
 }
 
 /*int main(int argc, char *argv[])
