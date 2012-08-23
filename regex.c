@@ -39,22 +39,22 @@ char **splitByDelim(char str[], char delim[])
 
 char *trimwhitespace(char *str)
 {
-  char *end;
+  	char *end;
 
-  // Trim leading space
-  while(isspace(*str)) str++;
+        // Trim leading space
+        while(isspace(*str)) str++;
 
-  if(*str == 0)  // All spaces?
-    return str;
+        if(*str == 0)  // All spaces?
+        return str;
 
-  // Trim trailing space
-  end = str + strlen(str) - 1;
-  while(end > str && isspace(*end)) end--;
+	// Trim trailing space
+	end = str + strlen(str) - 1;
+	while(end > str && isspace(*end)) end--;
 
-  // Write new null terminator
-  *(end+1) = 0;
+	// Write new null terminator
+	*(end+1) = 0;
 
-  return str;
+	return str;
 }
 
 int main(void)
