@@ -19,21 +19,55 @@ regexStr regexMatch(char *re, char *txt)
 		}
 	}
 
-	//printf("(%s)(%s)(%s)(%s)\n", t.substr[0], t.substr[1], t.substr[2], t.substr[3]);
-
 	return t;
+}
+
+char **splitByDelim(char str[], char delim[])
+{
+	char *result = NULL;
+	char **components;
+	int count = 0;
+	components = malloc(sizeof(char*));
+	result = strtok(str, delim);
+	while (result != NULL) {
+		components[count] = result;
+		count++;
+		result = strtok(NULL, delim);
+	}
+	return components;
+}
+
+char *trimwhitespace(char *str)
+{
+  char *end;
+
+  // Trim leading space
+  while(isspace(*str)) str++;
+
+  if(*str == 0)  // All spaces?
+    return str;
+
+  // Trim trailing space
+  end = str + strlen(str) - 1;
+  while(end > str && isspace(*end)) end--;
+
+  // Write new null terminator
+  *(end+1) = 0;
+
+  return str;
 }
 
 int main(void)
 {
-	char *str = "say \"string\"";
+	char str[] = "say \"string\", say \"foo\", say";
+	char delim[] = ",";
+	char **components;
+	components = splitByDelim(str, delim);
 	char *pattern = "((?:[a-z][a-z0-9_]*))(\\s+)(\".*?\")";
-	regexStr restr = regexMatch(pattern, str);
+	regexStr restr = regexMatch(pattern, components[2]);
 
-	printf("\n[%s]\n", restr.substr[2]);
-
-
-	//free(restr);
+	printf("\n[%s]\n", trimwhitespace(components[2]));
+	printf("\n[%s]\n", restr.substr[0]);
 
 	return 0;
 }

@@ -12,5 +12,7 @@ typedef struct {
 } regexStr;
 
 regexStr regexMatch(char *re, char *txt);
+char **splitByDelim(char str[], char delim[]);
+char *trimwhitespace(char *str);
 
 #endif
