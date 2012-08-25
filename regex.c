@@ -22,7 +22,7 @@ regexStr regexMatch(char *re, char *txt)
 	return t;
 }
 
-char **splitByDelim(char str[], char delim[])
+char **splitByDelim(char *str, char delim[])
 {
 	char *result = NULL;
 	char **components;
@@ -57,17 +57,17 @@ char *trimwhitespace(char *str)
 	return str;
 }
 
-int main(void)
+/*int main(void)
 {
 	char str[] = "say \"string\", say \"foo\", say";
 	char delim[] = ",";
 	char **components;
 	components = splitByDelim(str, delim);
 	char *pattern = "((?:[a-z][a-z0-9_]*))(\\s+)(\".*?\")";
-	regexStr restr = regexMatch(pattern, components[2]);
+	regexStr restr = regexMatch(pattern, components[0]);
 
-	printf("\n[%s]\n", trimwhitespace(components[2]));
+	printf("\n[%s]\n", trimwhitespace(components[1]));
 	printf("\n[%s]\n", restr.substr[0]);
 
 	return 0;
-}
+}*/
