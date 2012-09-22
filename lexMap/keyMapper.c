@@ -119,11 +119,8 @@ char *targetFile_read(char *targetFile)
 	return fileContent;
 }
 
-void *targetFile_write(char *targetFile, char *str)
+void targetFile_write(char *targetFile, char *str)
 {
-	char *fileContent;
-	long fileSize;
-
 	FILE *fptr;
 	fptr = fopen(targetFile, "w");
 	
@@ -144,7 +141,7 @@ char* lex(char *targetFile, char *keyFile, char *mapped)
 	char **array = keyFile_parse(keyFile, n);
 	for (i = 0; i < n; i++) {
 		foo[i] = keySplit(array[i], ":");
-		t = realloc(t, sizeof(char *));
+		//t = realloc(t, sizeof(char *));
 		t = replace_string(t, foo[i].keyString, foo[i].valueString);
 		//printf("Replaced:\n%s\n", t);
 		free(array[i]);
