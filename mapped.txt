@@ -1,2 +1,3 @@
-say "Hi!", say "What's up?"
-say "See you around!"
+say("No!"), say("The Dude")
+say("'Nam")
+say("No!"), say("The Dude")

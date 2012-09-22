@@ -1,2 +1,2 @@
-Hi:say "Hi!", say "What's up?"
-Bye:say "See you around!"
+Lebowski:say("No!"), say("The Dude")
+Walter:say("'Nam")
