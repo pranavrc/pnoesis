@@ -1,5 +1,7 @@
 #include "regex.h"
 
+int tokenized = 0;
+
 /* Returning a struct as part of a bad hack to get around pointer traversal issues. TODO: Dynamic mem alloc */
 regexStr regexMatch(char *re, char *txt)
 {
@@ -11,7 +13,7 @@ regexStr regexMatch(char *re, char *txt)
 
 	pcre *r =  pcre_compile(re, PCRE_CASELESS|PCRE_DOTALL, &error, &erroffset, NULL);
 	int rc = pcre_exec(r, NULL, txt, strlen(txt), 0, 0, ovector, 186);
-	printf("%d\n", rc);
+	//printf("%d\n", rc);
 
 	if (rc > 0) {
 		for (substrCount = 1; substrCount <= rc; substrCount++) {
@@ -19,6 +21,7 @@ regexStr regexMatch(char *re, char *txt)
 		}
 	}
 
+	free(r);
 	return t;
 }
 
@@ -29,11 +32,14 @@ char **splitByDelim(char *str, char delim[])
 	int count = 0;
 	components = malloc(sizeof(char*));
 	result = strtok(str, delim);
+
 	while (result != NULL) {
 		components[count] = result;
 		count++;
 		result = strtok(NULL, delim);
+		tokenized++;
 	}
+
 	return components;
 }
 
@@ -67,7 +73,7 @@ char *trimwhitespace(char *str)
 	regexStr restr = regexMatch(pattern, components[0]);
 
 	printf("\n[%s]\n", trimwhitespace(components[1]));
-	printf("\n[%s]\n", restr.substr[0]);
+	printf("\n[%s]\n", restr.substr[2]);
 
 	return 0;
 }*/
