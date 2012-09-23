@@ -42,7 +42,7 @@ char **keyFile_parse(char *keyFile, int lineCount)
 	char **contentArray;
 	int lineTrans = 0;
 
-	contentArray = malloc(lineCount * sizeof(char*));
+	contentArray = malloc((lineCount + 1) * sizeof(char*));
 
 	while (fgets(lineBuffer, sizeof(lineBuffer), fptr)) {
 		lineTrans++;
@@ -81,7 +81,7 @@ char *replace_string(const char *str, const char *old, const char *new)
 		}
 	}
 
-	ret = malloc(i + count * (newlen - oldlen));
+	ret = malloc((i + count * (newlen - oldlen) + 1) * sizeof(char));
 	if (ret == NULL) exit(EXIT_FAILURE);
 
 	i = 0;
@@ -111,7 +111,7 @@ char *targetFile_read(char *targetFile)
 	fileSize = ftell(fptr);
 	fseek(fptr, 0L, SEEK_SET);
 
-	fileContent = malloc(fileSize * sizeof(char));
+	fileContent = malloc((fileSize + 1) * sizeof(char));
 
 	fread(fileContent, 1, fileSize, fptr);
 	fclose(fptr);
@@ -123,15 +123,15 @@ void targetFile_write(char *targetFile, char *str)
 {
 	FILE *fptr;
 	fptr = fopen(targetFile, "w");
-	
+
 	if (!fptr) terminate("Target file not found.");
-	
+
 	fwrite(str, strlen(str), 1, fptr);
-	fclose(fptr);	
+	fclose(fptr);
 }
 
 
-char* lex(char *targetFile, char *keyFile, char *mapped)
+void lex(char *targetFile, char *keyFile, char *mapped)
 {
 	char *t = targetFile_read(targetFile);
 	//printf("Target file contents: \n%s\n", t);
@@ -141,7 +141,7 @@ char* lex(char *targetFile, char *keyFile, char *mapped)
 	char **array = keyFile_parse(keyFile, n);
 	for (i = 0; i < n; i++) {
 		foo[i] = keySplit(array[i], ":");
-		//t = realloc(t, sizeof(char *));
+		t = realloc(t, (strlen(t) + 1) * sizeof(char));
 		t = replace_string(t, foo[i].keyString, foo[i].valueString);
 		//printf("Replaced:\n%s\n", t);
 		free(array[i]);
@@ -150,8 +150,7 @@ char* lex(char *targetFile, char *keyFile, char *mapped)
 	targetFile_write(mapped, t);
 
 	free(array);
-	
-	return t;
+	free(t);
 }
 
 /*int main(int argc, char *argv[])

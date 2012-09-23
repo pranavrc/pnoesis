@@ -21,6 +21,6 @@ keyPairs keySplit(char *oKey, char *deLim);
 char *replace_string(const char *str, const char *old, const char *new);
 char *targetFile_read(char *targetFile);
 void targetFile_write(char *targetFile, char *str);
-char* lex(char *targetFile, char *keyFile, char *mapped);
+void lex(char *targetFile, char *keyFile, char *mapped);
 
 #endif
