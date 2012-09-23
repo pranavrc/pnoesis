@@ -1,2 +1,3 @@
-Lebowski:say("No!"), say("The Dude")
-Walter:say("'Nam")
+c'est:say("that's")
+tout comme:say("just like")
+votre opinion:say("your opinion")
