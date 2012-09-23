@@ -34,6 +34,7 @@ char **splitByDelim(char *str, char delim[])
 	result = strtok(str, delim);
 
 	while (result != NULL) {
+		components = realloc(components, (strlen(result) + 1) * sizeof(char*));
 		components[count] = result;
 		count++;
 		result = strtok(NULL, delim);
