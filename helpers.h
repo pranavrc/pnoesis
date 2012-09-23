@@ -5,7 +5,7 @@
 
 void say(char *stuffToSay)
 {
-	printf("%s\n" stuffToSay);
+	printf("%s\n", stuffToSay);
 }
 
 #endif
