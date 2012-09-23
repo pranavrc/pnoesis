@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
 	strcat(stub, "return 0;\n}");
 
 	targetFile_write("gen.c", stub);
-	system("gcc gen.c -o gen helpers.h");
-	system("./gen");
+	system("gcc gen.c -o obj/gen helpers.h");
+	system("obj/gen");
 	
 	return 0;
 }
